@@ -2,6 +2,7 @@ from website import create_app
 from flask_mqtt import Mqtt
 import json
 import csv
+from waitress import serve
 
 app = create_app()
 
@@ -43,4 +44,5 @@ def handle_mqtt_message(client, userdata, message):
 
 
 if __name__ == '__main__':
-    app.run(debug=True,host='0.0.0.0',port='5000')
+    # app.run(debug=True,host='0.0.0.0',port='5000')
+    serve(app, host='0.0.0.0', port=5000)
