@@ -1,0 +1,68 @@
+{% extends "base.html" %} {% block content %}
+    <h1 class="page-title">Indoor Air Quality Measurement Results</h1>
+    <div id="air-quality-chart-settings">
+        <form id="updateChartForm" method="POST" class="form">
+            <label for="device-name">Device Name:</label>
+            <input type="text" id="device-name" name="device-name" required placeholder="Enter device name">
+            <label for="start-date">Start Date and Time:</label>
+            <input type="datetime-local" id="start-date" name="start-date" required value="2025-02-12T00:00">
+            <label for="end-date">End Date and Time:</label>
+            <input type="datetime-local" id="end-date" name="end-date" required value="2025-02-13T23:59">
+            <button type="submit" class="update-chart" onclick="submitHistoryForm()">Update Charts</button>
+        </form>
+    </div>
+    <div class="spinner center">
+        <div class="spinner-blade"></div>
+        <div class="spinner-blade"></div>
+        <div class="spinner-blade"></div>
+        <div class="spinner-blade"></div>
+        <div class="spinner-blade"></div>
+        <div class="spinner-blade"></div>
+        <div class="spinner-blade"></div>
+        <div class="spinner-blade"></div>
+        <div class="spinner-blade"></div>
+        <div class="spinner-blade"></div>
+        <div class="spinner-blade"></div>
+        <div class="spinner-blade"></div>
+      </div>
+    <div id="charts-container">
+        <!-- Đồ thị SC4DX -->
+        <div class="chart-container">
+            <div>
+                <h3>SC4DX Data</h3>
+                <canvas id="scd4xCO2Chart"></canvas>
+                <canvas id="scd4xTemperatureChart"></canvas>
+                <canvas id="scd4xHumidityChart"></canvas>
+            </div>
+            <div>
+                <h3>BME680 Data</h3>
+                <canvas id="bme680PressureChart"></canvas>
+                <canvas id="bme680TemperatureChart"></canvas>
+                <canvas id="bme680HumidityChart"></canvas>
+            </div>
+        </div>
+    
+        <!-- Đồ thị SGP41 -->
+        <div class="chart-container">
+            <div id="sgp41ChartContainer">
+                <h3>SGP41 Data</h3>
+                <canvas id="sgp41TVOCChart"></canvas>
+                <canvas id="sgp41NOXChart"></canvas>
+            </div>
+    
+        <!-- Đồ thị LTR -->
+            <div id="ltrltrChartContainer">
+                <h3>LTR Sensor Data</h3>
+                <canvas id="ltrVisibleChart"></canvas>
+                <canvas id="ltrInfraredChart"></canvas>
+            </div>
+        </div>
+    
+        <!-- Đồ thị Battery Voltage -->
+        <div id="batteryVoltageChartContainer">
+            <h3>Battery Voltage Data</h3>
+            <canvas id="batteryVoltageChart"></canvas>
+        </div>
+    </div>
+
+{% endblock %}

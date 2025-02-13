@@ -1,0 +1,65 @@
+{% extends "base.html" %} {% block content %}
+<h1 class="page-title">Live Air Quality</h1>
+<div id="device-form">
+    <form id="update_live_data-form" method="POST" class="form">
+        <label for="device-name">Device Name:</label>
+        <input type="text" id="device-name" name="device-name" required placeholder="Enter device name">
+        <button type="submit" class="streaming" onclick="UpdateDeviceId()">Start Streaming</button>
+    </form>
+</div>
+<div class="sensor-grid">
+    <div class="sensor-card">
+        <label>NOx (SGP41):</label>
+        <span id="nox_data_sgp41">N/A</span>
+    </div>
+    <div class="sensor-card">
+        <label>TVOC():</label>
+        <span id="tvoc_data_sgp41">N/A</span>
+    </div>
+    <div class="sensor-card">
+        <label>CO2(ppm):</label>
+        <span id="co2_data">N/A</span>
+    </div>
+    <div class="sensor-card">
+        <label>Average Temperature(°C):</label>
+        <span id="average_temperature">N/A</span>
+    </div>
+    <div class="sensor-card">
+        <label>Average Humidity(%):</label>
+        <span id="average_humidity">N/A</span>
+    </div>
+    <div class="sensor-card">
+        <label>Pressure (hPa):</label>
+        <span id="pressure_data_bme680">N/A</span>
+    </div>
+    <div class="sensor-card">
+        <label>Visible (lux):</label>
+        <span id="visible_data_ltr">N/A</span>
+    </div>
+    <div class="sensor-card">
+        <label>Infrared (LTR):</label>
+        <span id="infrared_data_ltr">N/A</span>
+    </div>
+    <div class="sensor-card">
+        <label>Battery Voltage(V):</label>
+        <span id="battery_voltage_data">N/A</span>
+    </div>
+    <div class="sensor-card">
+        <label>Power Status:</label>
+        <span id="power_status_data">N/A</span>
+    </div>
+    <div class="sensor-card">
+        <label>SCD4x:</label>
+        <p><strong>Temperature:</strong> <span id="temperature_data_scd4x">N/A</span>°C</p>
+        <p><strong>Humidity:</strong> <span id="humidity_data_scd4x">N/A</span>%</p>
+    </div>
+    
+    <div class="sensor-card">
+        <label>BME680:</label>
+        <p><strong>Temperature:</strong> <span id="temperature_data_bme680">N/A</span>°C</p>
+        <p><strong>Humidity:</strong> <span id="humidity_data_bme680">N/A</span>%</p>
+    </div>    
+    <!-- Container để chứa các node -->
+    <div id="node_data_container"></div>
+</div>
+{% endblock %}

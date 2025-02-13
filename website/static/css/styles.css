@@ -1,0 +1,298 @@
+#charts-container {
+  display: none;
+  margin-top: 20px;
+}
+
+.chart-container {
+    display: flex;
+    justify-content: space-between;  /* Căn đều 2 phần tử */
+    gap: 20px;  /* Khoảng cách giữa 2 đồ thị */
+    margin-bottom: 30px; /* Khoảng cách giữa các nhóm đồ thị */
+}
+
+/* Mỗi phần tử trong container chiếm 50% chiều rộng */
+.chart-container > div {
+    width: 48%;  /* Đảm bảo mỗi đồ thị chiếm gần 50% chiều rộng */
+    min-width: 400px;  /* Đảm bảo kích thước tối thiểu */
+}
+
+canvas {
+    width: 100%;  /* Đảm bảo canvas chiếm 100% chiều rộng của phần tử chứa */
+    max-height: 400px;  /* Giới hạn chiều cao tối đa */
+}
+body {
+    font-family: Arial, sans-serif;
+    background-color: #ffffff;
+    margin: 0;
+    padding: 0;
+    display: block;
+    justify-content: center;
+    width: 100%;
+    height: 1000px;
+}
+.page-title {
+    text-align: center;
+    padding: 10px;
+}
+#IAQ-navbar {
+    width: 100%;
+    display: inline-block;
+}
+
+#air-quality-chart-settings {
+    background-color: #fff;
+    text-align: center;
+    width: 100%;
+    margin: 0; /* Kiểm tra xem có margin không cần thiết không */
+}
+
+h1 {
+    color: #333;
+    margin-bottom: 1.5rem;
+}
+
+.form {
+    display: flex;          /* Kích hoạt Flexbox */
+    flex-wrap: wrap;        /* Cho phép xuống dòng khi không đủ chỗ */
+    align-items: center;    /* Căn giữa các phần tử theo chiều dọc */
+    gap: 1rem; 
+}
+
+label {
+    font-size: 1rem;
+    color: #555;
+    text-align: left;
+}
+input#device-name{ 
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 0.75rem;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    width: 20%;
+    box-sizing: border-box;
+    max-width: 200px;    
+}
+input#start-date,
+input#end-date{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 0.75rem;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    width: 45%;
+    box-sizing: border-box;
+    max-width: 400px;
+}
+
+input:focus {
+    outline: none;
+    border-color: #4caf50; /* Green border on focus */
+    box-shadow: 0 0 5px rgba(40, 167, 69, 0.5);
+}
+
+button.update-chart {
+    padding: 0.75rem;
+    font-size: 1rem;
+    color: #fff;
+    background-color: #4caf50; /* Green button */
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button.update-chart:hover {
+    background-color: #218838;
+}
+#device-form{
+    padding: 20px;
+}
+button.streaming {
+    padding: 0.75rem;
+    font-size: 1rem;
+    color: #fff;
+    background-color: #4caf50; /* Green button */
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button.streaming:hover {
+    background-color: #218838;
+}
+.sensor-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Chia các ô thành grid */
+    gap: 20px;
+}
+
+.sensor-card {
+    padding: 10px;
+    border: 1px solid #ccc;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    text-align: center; /* Canh giữa nội dung */
+    font-weight: bold;
+    height: 150px;
+}
+
+.sensor-card label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 8px;
+    text-align: center;
+}
+
+.sensor-card span:not(#temperature_data_scd4x):not(#humidity_data_scd4x):not(#temperature_data_bme680):not(#humidity_data_bme680) {
+    display: block; /* Đảm bảo span chiếm đầy dòng */
+    font-size: 24px; /* Kích thước chữ to hơn */
+    font-weight: bold;
+    padding: 20px; /* Tạo khoảng cách phía trên */
+}
+
+#node_data_container {
+    display: contents;
+}
+.spinner {
+    font-size: 28px;
+    position: relative;
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+  }
+  
+  .spinner.center {
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    display: none;
+  }
+  
+  .spinner .spinner-blade {
+    position: absolute;
+    left: 0.4629em;
+    bottom: 0;
+    width: 0.074em;
+    height: 0.2777em;
+    border-radius: 0.0555em;
+    background-color: transparent;
+    -webkit-transform-origin: center -0.2222em;
+    -ms-transform-origin: center -0.2222em;
+    transform-origin: center -0.2222em;
+    animation: spinner-fade9234 1s infinite linear;
+  }
+  
+  .spinner .spinner-blade:nth-child(1) {
+    -webkit-animation-delay: 0s;
+    animation-delay: 0s;
+    -webkit-transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  
+  .spinner .spinner-blade:nth-child(2) {
+    -webkit-animation-delay: 0.083s;
+    animation-delay: 0.083s;
+    -webkit-transform: rotate(30deg);
+    -ms-transform: rotate(30deg);
+    transform: rotate(30deg);
+  }
+  
+  .spinner .spinner-blade:nth-child(3) {
+    -webkit-animation-delay: 0.166s;
+    animation-delay: 0.166s;
+    -webkit-transform: rotate(60deg);
+    -ms-transform: rotate(60deg);
+    transform: rotate(60deg);
+  }
+  
+  .spinner .spinner-blade:nth-child(4) {
+    -webkit-animation-delay: 0.249s;
+    animation-delay: 0.249s;
+    -webkit-transform: rotate(90deg);
+    -ms-transform: rotate(90deg);
+    transform: rotate(90deg);
+  }
+  
+  .spinner .spinner-blade:nth-child(5) {
+    -webkit-animation-delay: 0.332s;
+    animation-delay: 0.332s;
+    -webkit-transform: rotate(120deg);
+    -ms-transform: rotate(120deg);
+    transform: rotate(120deg);
+  }
+  
+  .spinner .spinner-blade:nth-child(6) {
+    -webkit-animation-delay: 0.415s;
+    animation-delay: 0.415s;
+    -webkit-transform: rotate(150deg);
+    -ms-transform: rotate(150deg);
+    transform: rotate(150deg);
+  }
+  
+  .spinner .spinner-blade:nth-child(7) {
+    -webkit-animation-delay: 0.498s;
+    animation-delay: 0.498s;
+    -webkit-transform: rotate(180deg);
+    -ms-transform: rotate(180deg);
+    transform: rotate(180deg);
+  }
+  
+  .spinner .spinner-blade:nth-child(8) {
+    -webkit-animation-delay: 0.581s;
+    animation-delay: 0.581s;
+    -webkit-transform: rotate(210deg);
+    -ms-transform: rotate(210deg);
+    transform: rotate(210deg);
+  }
+  
+  .spinner .spinner-blade:nth-child(9) {
+    -webkit-animation-delay: 0.664s;
+    animation-delay: 0.664s;
+    -webkit-transform: rotate(240deg);
+    -ms-transform: rotate(240deg);
+    transform: rotate(240deg);
+  }
+  
+  .spinner .spinner-blade:nth-child(10) {
+    -webkit-animation-delay: 0.747s;
+    animation-delay: 0.747s;
+    -webkit-transform: rotate(270deg);
+    -ms-transform: rotate(270deg);
+    transform: rotate(270deg);
+  }
+  
+  .spinner .spinner-blade:nth-child(11) {
+    -webkit-animation-delay: 0.83s;
+    animation-delay: 0.83s;
+    -webkit-transform: rotate(300deg);
+    -ms-transform: rotate(300deg);
+    transform: rotate(300deg);
+  }
+  
+  .spinner .spinner-blade:nth-child(12) {
+    -webkit-animation-delay: 0.913s;
+    animation-delay: 0.913s;
+    -webkit-transform: rotate(330deg);
+    -ms-transform: rotate(330deg);
+    transform: rotate(330deg);
+  }
+  
+  @keyframes spinner-fade9234 {
+    0% {
+      background-color: #69717d;
+    }
+  
+    100% {
+      background-color: transparent;
+    }
+  }
+
+
