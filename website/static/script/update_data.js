@@ -4,7 +4,30 @@ let intervalId = null; // Biến để lưu id của setInterval
 let currentDeviceId = null;
 let chartInstances = {}; // Lưu trữ biểu đồ theo ID để quản lý
 
-function createChart(canvasId, label, data, timestamps , borderColor, yMin, yMax, stepSize) {
+document.addEventListener("DOMContentLoaded", function() {
+    let now = new Date();
+    
+    // Lấy ngày hôm nay ở định dạng YYYY-MM-DD
+    let today = now.toISOString().slice(0, 10);
+    
+    // Định dạng thời gian mặc định: 00:00 cho start, 23:59 cho end
+    let startDateTime = today + "T00:00";
+    let endDateTime = today + "T23:59";
+    
+    // Gán giá trị mặc định cho input
+    document.getElementById("start-date").value = startDateTime;
+    document.getElementById("end-date").value = endDateTime;
+});
+
+function createChart(canvasId, label, data, timestamps , borderColor, stepSize) {
+    // 📈 Xác định min, max của dữ liệu
+    const dataMin = Math.min(...data);
+    const dataMax = Math.max(...data);
+
+    // 🛠️ Điều chỉnh khoảng Y (thêm một biên độ nhỏ)
+    const padding = (dataMax - dataMin) * 0.1 || 1; // Nếu dataMin = dataMax thì thêm khoảng nhỏ
+    const yMin = dataMin - padding;
+    const yMax = dataMax + padding;
     let canvas = document.getElementById(canvasId);
     let ctx = canvas.getContext('2d');
 
@@ -70,20 +93,20 @@ function updateHistorySensorData(data){
     const batteryVoltageData = data.battery_voltage_data;
     console.log(batteryVoltageData)
     document.getElementById("charts-container").style.display = "block";
-    createChart('scd4xCO2Chart', 'CO2 (ppm)', co2Data, timestamps, 'green', 200, 2000, 50);
-    createChart('scd4xTemperatureChart', 'Temperature (°C)', temperatureDataScd4x, timestamps, 'red', 15, 45, 1);
+    createChart('scd4xCO2Chart', 'CO2 (ppm)', co2Data, timestamps, 'green', 50);
+    createChart('scd4xTemperatureChart', 'Temperature (°C)', temperatureDataScd4x, timestamps, 'red', 1);
     createChart('scd4xHumidityChart', 'Humidity (%)', humidityDataScd4x, timestamps, 'blue', 0, 100, 10);
     
-    createChart('bme680TemperatureChart', 'Temperature (°C)', temperatureDataBme680, timestamps, 'red', 15, 45, 1);
-    createChart('bme680HumidityChart', 'Humidity (%)', humidityDataBme680, timestamps, 'blue', 0, 100, 10);
-    createChart('bme680PressureChart', 'Pressure (Pa)', pressureDataBme680, timestamps, 'purple', 1004, 1016, 0.5);
+    createChart('bme680TemperatureChart', 'Temperature (°C)', temperatureDataBme680, timestamps, 'red',  1);
+    createChart('bme680HumidityChart', 'Humidity (%)', humidityDataBme680, timestamps, 'blue', 10);
+    createChart('bme680PressureChart', 'Pressure (Pa)', pressureDataBme680, timestamps, 'purple', 0.5);
     
-    createChart('sgp41TVOCChart', 'TVOC', tvocDataSgp41, timestamps, 'blue', 0, 520, 50);
-    createChart('sgp41NOXChart', 'NOx (ppb)', noxDataSgp41, timestamps, 'blue', 0, 10, 1);
+    createChart('sgp41TVOCChart', 'TVOC', tvocDataSgp41, timestamps, 'blue', 50);
+    createChart('sgp41NOXChart', 'NOx (ppb)', noxDataSgp41, timestamps, 'blue', 1);
     
-    createChart('ltrVisibleChart', 'Visible Light (Lux)', visibleDataLTR, timestamps, 'yellow', 0, 50, 5);
-    createChart('ltrInfraredChart', 'Infrared Light (Lux)', infraredDataLTR, timestamps,'purple', 0, 50, 5);
-    createChart('batteryVoltageChart', 'Battery Voltage (V)', batteryVoltageData, timestamps, 'orange', 3.0, 4.3, 25);
+    createChart('ltrVisibleChart', 'Visible Light (Lux)', visibleDataLTR, timestamps, 'yellow', 5);
+    createChart('ltrInfraredChart', 'Infrared Light (Lux)', infraredDataLTR, timestamps,'purple', 5);
+    createChart('batteryVoltageChart', 'Battery Voltage (V)', batteryVoltageData, timestamps, 'orange', 25);
     // Object.keys(nodeTemperatureData).forEach(nodeId => {
     //     createChart(`node${nodeId}TemperatureChart`, `Node ${nodeId} Temperature (°C)`, nodeTemperatureData[nodeId].data, 'red', 15, 45, 1);
     //     createChart(`node${nodeId}HumidityChart`, `Node ${nodeId} Humidity (%)`, nodeHumidityData[nodeId].data, 'blue', 0, 100, 10);
