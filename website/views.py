@@ -1,12 +1,12 @@
-from flask import Blueprint, render_template, request, jsonify
+from flask import Blueprint, render_template, request, jsonify, redirect
 from website.request_processing import *
 from flask_socketio import SocketIO
 
 views = Blueprint('view', __name__)
 
 @views.route('/')
-def index():
-    return render_template('base.html')
+def home():
+    return redirect("/live-monitoring")
 
 # Route để lấy dữ liệu từ Firebase và hiển thị trên web
 @views.route('/get-history', methods=['POST','GET'])
@@ -35,7 +35,6 @@ def get_history():
             return data
     else:
         return render_template("history.html")
-    return render_template("history.html")
 
 @views.route('/live-monitoring', methods=["POST","GET"])
 def live_monitoring_page():
